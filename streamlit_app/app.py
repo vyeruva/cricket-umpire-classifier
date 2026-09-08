@@ -24,8 +24,17 @@ import labeling  # noqa: F401
 # WindowsPath, so unpickling fails with "cannot instantiate 'WindowsPath' on
 # your system" unless we alias it to PosixPath first. Guarded so this is a
 # no-op when testing locally on Windows.
+#
+# Python 3.13+ moved the concrete Path classes into the pathlib._local
+# submodule, and pickle records that as the class's module (confirmed by
+# disassembling this .pkl's pickle stream — it references "pathlib._local
+# WindowsPath", not "pathlib WindowsPath"). Patching pathlib.WindowsPath
+# alone rebinds a different name and has no effect; pathlib._local is the
+# module pickle's find_class actually looks up.
 if platform.system() != "Windows":
     pathlib.WindowsPath = pathlib.PosixPath
+    if hasattr(pathlib, "_local"):
+        pathlib._local.WindowsPath = pathlib._local.PosixPath
 
 APP_DIR = Path(__file__).parent
 MODEL_PATH = APP_DIR / "umpire_signal_resnet34.pkl"
