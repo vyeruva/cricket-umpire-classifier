@@ -1,0 +1,14 @@
+# Install torch/torchvision FIRST with the CUDA 12.8 wheel index (required for
+# RTX 5070 Ti / Blackwell sm_120 support). Do NOT let a later `pip install` pull
+# in a different torch build from PyPI.
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#
+# Then install the rest:
+#
+#   pip install -r requirements.txt
+
+fastai
+gdown
+matplotlib
+pandas

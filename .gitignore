@@ -1,0 +1,13 @@
+# Project-local Python environment
+.venv/
+__pycache__/
+*.pyc
+
+# Raw dataset is a mirror of a third-party Kaggle dataset — large and not
+# ours to redistribute in a public repo. Re-download via scripts/download_kaggle.py.
+data/
+
+# Trained model exports are large (tens to 100+MB). Only the copy actually
+# needed for deployment (streamlit_app/) is force-added, since it's under
+# GitHub's 100MB per-file limit; the others aren't needed in the repo.
+*.pkl
