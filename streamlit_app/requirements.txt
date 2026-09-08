@@ -1,10 +1,14 @@
 # CPU-only torch build: smaller download and lower memory than the default
 # PyPI wheel (which bundles CUDA libraries we don't need on Streamlit Cloud's
 # CPU-only hosting), which matters given the 1GB memory limit on the free tier.
+#
+# Versions pinned to match what actually exported umpire_signal_resnet34.pkl
+# (see requirements.txt at the project root / README) — an unpinned install
+# resolved a newer torch/fastai on Streamlit Cloud that couldn't unpickle it.
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch
-torchvision
+torch==2.11.0
+torchvision==0.26.0
 
-fastai
+fastai==2.8.8
 streamlit
 pandas
