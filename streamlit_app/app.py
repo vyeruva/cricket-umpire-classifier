@@ -5,6 +5,8 @@ the GitHub repo. Everything it needs (the exported model, the label
 helper, example images) lives alongside it in this same folder.
 """
 
+import pathlib
+import platform
 from pathlib import Path
 
 import pandas as pd
@@ -16,6 +18,14 @@ from fastai.vision.all import PILImage, load_learner
 # module importable, which is why labeling.py must sit next to this file
 # even though we never call the function directly at inference time.
 import labeling  # noqa: F401
+
+# The model was exported on Windows, so fastai also pickled its training
+# data path as a WindowsPath. Linux (Streamlit Cloud) refuses to instantiate
+# WindowsPath, so unpickling fails with "cannot instantiate 'WindowsPath' on
+# your system" unless we alias it to PosixPath first. Guarded so this is a
+# no-op when testing locally on Windows.
+if platform.system() != "Windows":
+    pathlib.WindowsPath = pathlib.PosixPath
 
 APP_DIR = Path(__file__).parent
 MODEL_PATH = APP_DIR / "umpire_signal_resnet34.pkl"
