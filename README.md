@@ -7,6 +7,10 @@ action**.
 Dataset: [Cricket Umpires Action Classification](https://www.kaggle.com/datasets/warcoder/cricket-umpires-action-classification)
 on Kaggle (a mirror of the SNOW dataset — 390 images, 78 per class).
 
+**Live demo:** https://cricket-umpire-classifier-d5krzcxhtvbocpu5rphcvh.streamlit.app/
+(Streamlit Community Cloud; if it has been idle it sleeps - click the wake-up
+button and give it a minute.)
+
 ## Project layout
 
 ```
